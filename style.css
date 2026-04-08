@@ -394,3 +394,33 @@ footer { padding: 80px 20px; background: #f9f6f2; text-align: center; border-top
 .lightbox.active {
     display: flex !important;
 }
+
+/* --- 手機優化擴充 --- */
+@media (max-width: 480px) {
+    /* 1. 作品集從三欄改為單欄，讓圖片在小螢幕上更清楚 */
+    .masonry-grid {
+        column-count: 1 !important; 
+        gap: 15px;
+    }
+
+    /* 2. 減少區塊上下間距，避免手機滑太久 */
+    .section {
+        padding: 50px 15px !important;
+    }
+
+    /* 3. 調整標題字體大小，防止標題在手機上跑位 */
+    .brand-title-main {
+        font-size: 1.8rem;
+    }
+
+    /* 4. 禁止水平溢出，防止網頁左右晃動 */
+    body {
+        overflow-x: hidden;
+    }
+}
+
+/* 5. 燈箱在手機上的優化：讓圖片能填滿更多空間 */
+.lightbox-img {
+    max-width: 95% !important;
+    max-height: 70% !important;
+}
