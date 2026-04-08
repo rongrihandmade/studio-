@@ -1,0 +1,396 @@
+/* --- 絨日 RongRi - 全域核心設計 --- */
+:root {
+    --primary-warm: #a68b7c;
+    --text-main: #4a4a4a;
+    --text-light: #8c8c8c;
+    --bg-color: #fdfaf5;
+    --nav-bg: rgba(253, 250, 245, 0.85);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.8;
+}
+
+/* --- 導覽列樣式 --- */
+.main-nav {
+    position: fixed; top: 0; width: 100%; z-index: 1000;
+    transition: all 0.4s ease; padding: 20px 0;
+}
+
+.nav-container {
+    max-width: 1100px; margin: 0 auto; padding: 0 25px;
+    display: flex; justify-content: space-between; align-items: center;
+}
+
+.nav-logo {
+    font-family: 'Noto Serif TC', serif; font-size: 1.4rem;
+    color: var(--primary-warm); text-decoration: none; font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.nav-links a {
+    text-decoration: none; color: var(--text-main); font-size: 0.9rem;
+    margin-left: 30px; transition: 0.3s; letter-spacing: 1px;
+}
+
+.nav-links a:hover { color: var(--primary-warm); }
+
+.nav-scrolled {
+    background: var(--nav-bg); padding: 12px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05); backdrop-filter: blur(10px);
+}
+
+/* 背景與動畫 */
+.background-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: url('images/back.png') no-repeat center center;
+    background-size: cover; opacity: 0.12; z-index: -1; filter: blur(2px);
+}
+
+header { text-align: center; padding: 140px 20px 60px; }
+.logo-large { width: 160px; height: auto; margin-bottom: 30px; }
+.brand-title-main { font-family: 'Noto Serif TC', serif; color: var(--primary-warm); letter-spacing: 3px; }
+
+/* 品牌故事 */
+.about-story-curated { max-width: 900px; margin: 0 auto 120px; padding: 0 25px; scroll-margin-top: 100px; }
+.story-border-box { position: relative; border: 1px solid rgba(166, 139, 124, 0.3); padding: 70px 40px; background: rgba(255,255,255,0.5); }
+.story-tag { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--bg-color); padding: 0 20px; font-size: 0.75rem; letter-spacing: 4px; color: var(--text-light); }
+.story-title { font-family: 'Noto Serif TC', serif; font-size: 1.8rem; color: var(--primary-warm); text-align: center; margin-bottom: 25px; }
+.story-slogan-gold { text-align: center; font-family: 'Noto Serif TC', serif; font-weight: 700; margin-bottom: 40px; }
+.drop-cap::first-letter { font-family: 'Noto Serif TC', serif; font-size: 3.2rem; float: left; margin-right: 12px; color: var(--primary-warm); line-height: 1; }
+.story-detail-grid { margin-top: 50px; display: grid; gap: 40px; }
+.story-detail-item h3 { color: var(--primary-warm); margin-bottom: 10px; text-align: center; font-size: 1.1rem; font-family: 'Noto Serif TC', serif; }
+.story-detail-item h3 span { opacity: 0.5; font-size: 0.8rem; margin-right: 10px; border-bottom: 1px solid var(--primary-warm); }
+
+/* 統一標題字體修正 (包含客製流程與作品集) */
+.section-title, .gallery-title { 
+    text-align: center; 
+    font-family: 'Noto Serif TC', serif; 
+    color: var(--primary-warm); 
+    margin-bottom: 40px; 
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+}
+
+/* 連結與按鈕 */
+.links-container { text-align: center; margin-bottom: 100px; scroll-margin-top: 100px; }
+.btn-shop { text-decoration: none; color: var(--primary-warm); border: 1.5px solid var(--primary-warm); padding: 12px 35px; border-radius: 50px; transition: 0.4s; display: inline-block; margin: 10px; }
+.btn-shop:hover { background: var(--primary-warm); color: #fff; }
+.social-buttons { margin-top: 20px; }
+.social-buttons a { text-decoration: none; color: var(--text-light); margin: 0 15px; }
+
+/* --- 訂製流程與報價樣式 (採用 STYLE5 樣式) --- */
+
+/* 標籤與分隔線 */
+.section-tag { 
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem; 
+    font-weight: 600; 
+    letter-spacing: 0.3em; 
+    color: var(--primary-warm); 
+    margin-bottom: 1rem; 
+    display: block;
+    text-align: center;
+}
+
+.divider { 
+    width: 40px; 
+    height: 1px; 
+    background: var(--primary-warm); 
+    margin: 0 auto 2rem; 
+    opacity: 0.6; 
+}
+
+/* 報價卡片佈局 */
+.price-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 2rem; 
+    margin: 3rem 0; 
+}
+
+.price-card { 
+    background: #fff; 
+    padding: 3rem; 
+    border-radius: 15px; 
+    text-align: center; 
+    border: 1px solid rgba(0,0,0,0.03); 
+    transition: 0.3s; 
+}
+
+.price-card:hover { 
+    transform: translateY(-5px); 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+}
+
+.price-card h4 {
+    font-family: 'Noto Serif TC', serif;
+    color: var(--text-main);
+    margin-bottom: 1rem;
+}
+
+.price { 
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem; 
+    font-style: italic; 
+    color: var(--primary-warm); 
+}
+
+.price-notice {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-bottom: 4rem;
+}
+
+/* 流程與側欄混合網格 */
+.combined-grid { 
+    display: grid; 
+    grid-template-columns: 1.2fr 1fr; 
+    gap: 4rem; 
+    text-align: left;
+}
+
+.step-item { 
+    display: flex; 
+    gap: 1.5rem; 
+    margin-bottom: 2.5rem; 
+}
+
+.step-no { 
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; 
+    font-style: italic; 
+    color: var(--primary-warm); 
+    opacity: 0.7; 
+    min-width: 45px; 
+}
+
+.step-info h4 { 
+    margin-bottom: 0.5rem; 
+    color: var(--text-main); 
+    font-family: 'Noto Serif TC', serif;
+}
+
+.step-info p { 
+    font-size: 0.95rem; 
+    color: var(--text-light); 
+    font-weight: 300; 
+}
+
+/* 注意事項側欄 */
+.notice-sidebar { 
+    background: #fff; 
+    padding: 2.5rem; 
+    border-radius: 15px; 
+    border: 1px solid rgba(0,0,0,0.03); 
+    align-self: start; 
+}
+
+.notice-card h3 { 
+    font-size: 1.2rem; 
+    margin-bottom: 1.5rem; 
+    font-family: 'Cormorant Garamond', serif; 
+    letter-spacing: 0.1em; 
+    color: var(--primary-warm); 
+}
+
+.notice-list { 
+    list-style: none; 
+    font-size: 0.9rem; 
+    color: var(--text-light); 
+}
+
+.notice-list li { 
+    margin-bottom: 1.5rem; 
+    line-height: 1.6;
+}
+
+.notice-list strong { 
+    color: var(--text-main); 
+}
+
+/* RWD 適應 */
+@media (max-width: 768px) {
+    .combined-grid, .price-grid { 
+        grid-template-columns: 1fr; 
+    }
+}/* 作品集 */
+/* --- 典藏作品集樣式 (採用 STYLE5 樣式) --- */
+
+.gallery-section {
+    padding: 100px 0;
+    background-color: transparent;
+}
+
+.gallery-hint {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-light);
+    margin-bottom: 30px;
+    letter-spacing: 0.1em;
+}
+
+/* 作品集網格 */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 0 20px;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+    cursor: pointer;
+    background: #fdfaf7;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(166, 139, 124, 0.7); /* 使用您的品牌暖色調 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0; /* 平時隱藏 */
+    transition: all 0.4s ease;
+    z-index: 2;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1; /* 滑鼠移上去時顯示 */
+}
+
+.gallery-label {
+    color: #ffffff;
+    font-family: 'Noto Serif TC', serif;
+    border: 1px solid #ffffff;
+    padding: 8px 15px;
+    letter-spacing: 2px;
+}
+}
+
+.gallery-label {
+    color: white;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    border-bottom: 1px solid white;
+    padding-bottom: 5px;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.08);
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+/* 燈箱樣式 (Lightbox)  */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    flex-direction: column;
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+.lightbox-img {
+    max-width: 90%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+}
+
+.lightbox-caption {
+    color: white;
+    margin-top: 20px;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.2rem;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    color: white;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}@media (min-width: 900px) { .masonry-grid { column-count: 3; } }
+.masonry-item { display: inline-block; width: 100%; margin-bottom: 30px; background: #fff; padding: 15px; border-radius: 4px; transition: 0.4s; text-align: center; }
+.masonry-item img { width: 100%; cursor: zoom-in; }
+.masonry-item p { font-family: 'Noto Serif TC', serif; color: var(--primary-warm); margin-top: 10px; }
+.masonry-item:hover { transform: translateY(-10px) rotate(1.5deg); box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+
+/* Footer & Top Button */
+footer { padding: 80px 20px; background: #f9f6f2; text-align: center; border-top: 1px solid rgba(0,0,0,0.05); }
+.footer-line-btn { background: #06C755; color: white; text-decoration: none; padding: 12px 25px; border-radius: 50px; display: inline-flex; align-items: center; }
+.line-icon { width: 18px; margin-right: 10px; filter: brightness(0) invert(1); }
+#scrollTopBtn { display: none; position: fixed; bottom: 30px; right: 30px; background: var(--primary-warm); color: white; border: none; padding: 12px 18px; border-radius: 50px; cursor: pointer; z-index: 100; }
+
+@keyframes zoomIn { from {transform:scale(0.8); opacity:0;} to {transform:scale(1); opacity:1;} }
+.fade-in { animation: fadeIn 1.5s ease-out forwards; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+/* 手機版適應 */
+@media (max-width: 600px) {
+    .nav-links { display: none; }
+    header { padding: 120px 20px 50px; }
+    .logo-large { width: 130px; }
+}
+
+/* 確保燈箱平常是隱藏的，只有在 active 時才顯示 */
+.lightbox {
+    display: none; /* 初始隱藏 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* 關鍵：當 JavaScript 加入 active 類別時切換為顯示 */
+.lightbox.active {
+    display: flex !important;
+}
