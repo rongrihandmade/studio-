@@ -569,3 +569,43 @@ footer { padding: 80px 20px; background: #f9f6f2; text-align: center; border-top
     font-weight: 600;
     margin-right: 5px;
 }
+
+/* --- 立即諮詢按鈕 (純文字簡約版) --- */
+.cta-container {
+    text-align: center;
+    margin-top: 4rem; 
+    padding-bottom: 5rem; /* 增加底部間距，讓視覺更清爽 */
+}
+
+.btn-cta-line {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent; 
+    color: var(--primary-warm); 
+    border: 1.5px solid var(--primary-warm);
+    padding: 15px 55px; /* 加寬按鈕比例 */
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Noto Serif TC', serif; /* 維持優雅襯線體 [cite: 1] */
+    font-size: 1.1rem;
+    letter-spacing: 3px; /* 增加字距，更有空氣感 */
+    transition: all 0.4s ease;
+}
+
+.btn-cta-line:hover {
+    background-color: var(--primary-warm);
+    color: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(166, 139, 124, 0.2);
+}
+
+/* 手機版 RWD 優化 */
+@media (max-width: 600px) {
+    .btn-cta-line {
+        width: 85%;
+        padding: 12px 20px;
+        font-size: 1rem;
+        letter-spacing: 2px;
+    }
+}
