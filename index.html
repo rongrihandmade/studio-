@@ -146,43 +146,43 @@
     
     <div class="gallery-grid fade-up">
       <div class="gallery-item" onclick="openLightbox('images/product1.jpg','萌動神態')">
-        <img src="images/product1.jpg" alt="作品" loading="lazy">
+        <img src="images/product1.jpg" alt="作品 1" class="zoomable" loading="lazy">
         <div class="gallery-overlay"><span class="gallery-label">萌動神態</span></div>
       </div>
       <div class="gallery-item" onclick="openLightbox('images/product2.jpg','午後小憩')">
-        <img src="images/product2.jpg" alt="作品" loading="lazy">
+       <img src="images/product2.jpg" alt="作品 2" class="zoomable" loading="lazy">
         <div class="gallery-overlay"><span class="gallery-label">午後小憩</span></div>
       </div>
       <div class="gallery-item" onclick="openLightbox('images/product3.jpg','掌心溫度')">
-        <img src="images/product3.jpg" alt="作品" loading="lazy">
+       <img src="images/product3.jpg" alt="作品 3" class="zoomable" loading="lazy">
         <div class="gallery-overlay"><span class="gallery-label">掌心溫度</span></div>
       </div>
       <div class="gallery-item" onclick="openLightbox('images/product4.jpg','靈動眼神')">
-        <img src="images/product4.jpg" alt="作品" loading="lazy">
+        <img src="images/product4.jpg" alt="作品 4" class="zoomable" loading="lazy">
         <div class="gallery-overlay"><span class="gallery-label">靈動眼神</span></div>
       </div>
       <div class="gallery-item" onclick="openLightbox('images/product5.jpg','暖暖臉頰')">
-        <img src="images/product5.jpg" alt="作品" loading="lazy">
+      <img src="images/product5.jpg" alt="作品 5" class="zoomable" loading="lazy">
         <div class="gallery-overlay"><span class="gallery-label">暖暖臉頰</span></div>
       </div>
       <div class="gallery-item" onclick="openLightbox('images/product6.jpg','木框回憶')">
-        <img src="images/product6.jpg" alt="作品" loading="lazy">
+       <img src="images/product6.jpg" alt="作品 6" class="zoomable" loading="lazy">
         <div class="gallery-overlay"><span class="gallery-label">木框回憶</span></div>
       </div>
       <div class="gallery-item" onclick="openLightbox('images/product7.jpg','柔軟冒險')">
-        <img src="images/product7.jpg" alt="作品" loading="lazy">
+       <img src="images/product7.jpg" alt="作品 7" class="zoomable" loading="lazy">
         <div class="gallery-overlay"><span class="gallery-label">柔軟冒險</span></div>
       </div>
       <div class="gallery-item" onclick="openLightbox('images/product8.jpg','破框生命力')">
-        <img src="images/product8.jpg" alt="作品" loading="lazy">
+     <img src="images/product8.jpg" alt="作品 8" class="zoomable" loading="lazy">
         <div class="gallery-overlay"><span class="gallery-label">破框生命力</span></div>
       </div>
       <div class="gallery-item" onclick="openLightbox('images/product9.jpg','永恆陪伴')">
-        <img src="images/product9.jpg" alt="作品" loading="lazy">
+       <img src="images/product9.jpg" alt="作品 9" class="zoomable" loading="lazy">
         <div class="gallery-overlay"><span class="gallery-label">永恆陪伴</span></div>
       </div>
       <div class="gallery-item" onclick="openLightbox('images/product10.jpg','絨日暖陽')">
-        <img src="images/product10.jpg" alt="作品" loading="lazy">
+       <img src="images/product10.jpg" alt="作品 10" class="zoomable" loading="lazy">
         <div class="gallery-overlay"><span class="gallery-label">絨日暖陽</span></div>
       </div>
     </div>
@@ -220,62 +220,69 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    // 1. 導覽列捲動變色
+    // 選取 DOM 元素
     const nav = document.querySelector('.main-nav');
+    const topBtn = document.getElementById("scrollTopBtn");
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    const closeBtn = document.getElementById('lightboxClose');
+
+    // --- 1. 捲動相關邏輯 (合併導覽列與回到頂端按鈕) ---
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
+        const scrollY = window.scrollY;
+        
+        // 導覽列變色
+        if (scrollY > 50) {
             nav.classList.add('nav-scrolled');
         } else {
             nav.classList.remove('nav-scrolled');
         }
+
+        // 回到頂端按鈕顯示/隱藏
+        if (topBtn) {
+            topBtn.style.display = (scrollY > 300) ? "block" : "none";
+        }
     });
 
-    // 2. 回到頂端
-    const topBtn = document.getElementById("scrollTopBtn");
     if (topBtn) {
-        window.onscroll = function() {
-            if (document.documentElement.scrollTop > 300) {
-                topBtn.style.display = "block";
-            } else {
-                topBtn.style.display = "none";
-            }
-        };
         topBtn.onclick = () => window.scrollTo({top: 0, behavior: 'smooth'});
     }
 
-    // 3. 燈箱功能邏輯（確保這部分在最外面）
+    // --- 2. 燈箱功能核心邏輯 ---
+    // 定義開啟函式並掛載到 window 確保 HTML 的 onclick 能讀到
     window.openLightbox = function(src, cap) {
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightboxImg');
-        const lightboxCaption = document.getElementById('lightboxCaption');
-
         if (lightbox && lightboxImg) {
             lightboxImg.src = src;
             lightboxCaption.textContent = cap;
-            lightbox.classList.add('active'); // 賦予 active 類別
-            document.body.style.overflow = 'hidden'; // 禁止底層捲動
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden'; // 防止底層捲動
         }
     };
 
-    // 關閉燈箱
-    const closeBtn = document.getElementById('lightboxClose');
-    const lightboxElem = document.getElementById('lightbox');
+    // 關閉燈箱的統一函式
+    const closeLightbox = () => {
+        if (lightbox) {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto'; // 恢復捲動
+        }
+    };
 
     if (closeBtn) {
-        closeBtn.onclick = () => {
-            lightboxElem.classList.remove('active');
-            document.body.style.overflow = 'auto';
+        closeBtn.onclick = closeLightbox;
+    }
+
+    if (lightbox) {
+        lightbox.onclick = (e) => { 
+            // 只有點擊背景(id為lightbox)時才關閉，點擊圖片本身不關閉
+            if (e.target.id === 'lightbox') closeLightbox(); 
         };
     }
 
-    if (lightboxElem) {
-        lightboxElem.onclick = (e) => { 
-            if(e.target.id === 'lightbox') {
-                lightboxElem.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-        };
-    }
+    // 按下 ESC 鍵也能關閉燈箱 (增加使用者體驗)
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeLightbox();
+    });
 });
 </script>
 </body>
