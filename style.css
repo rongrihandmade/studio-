@@ -448,3 +448,60 @@ footer { padding: 80px 20px; background: #f9f6f2; text-align: center; border-top
         padding-bottom: env(safe-area-inset-bottom);
     }
 }
+
+/* --- 漢堡選單功能新增 --- */
+
+/* 預設隱藏按鈕 */
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.menu-toggle .bar {
+    width: 25px;
+    height: 2px;
+    background-color: var(--primary-warm);
+    transition: all 0.3s ease;
+}
+
+/* 手機版樣式調整 (覆蓋原本隱藏 nav-links 的邏輯) */
+@media (max-width: 600px) {
+    .menu-toggle {
+        display: flex; /* 顯示按鈕 */
+        z-index: 1001;
+    }
+
+    .nav-links {
+        display: flex; /* 從原本的 none 改為 flex */
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: -100%; /* 平時藏在右邊 */
+        width: 75%;
+        height: 100vh;
+        background: var(--nav-bg);
+        backdrop-filter: blur(15px);
+        padding-top: 100px;
+        transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        box-shadow: -10px 0 30px rgba(0,0,0,0.05);
+    }
+
+    .nav-links.active {
+        right: 0; /* 點擊後滑入螢幕 */
+    }
+
+    .nav-links a {
+        margin: 20px 0 !important;
+        font-size: 1.1rem !important;
+        text-align: center;
+        width: 100%;
+        margin-left: 0 !important; /* 取消原本左側間距 */
+    }
+
+    /* 漢堡按鈕轉成 X 的動畫 */
+    .menu-toggle.is-active .bar:nth-child(2) { opacity: 0; }
+    .menu-toggle.is-active .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .menu-toggle.is-active .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+}
