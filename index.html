@@ -234,6 +234,26 @@ document.addEventListener("DOMContentLoaded", function() {
     const lightboxCaption = document.getElementById('lightboxCaption');
     const closeBtn = document.getElementById('lightboxClose');
 
+// --- 漢堡選單控制邏輯 ---
+    const menuToggle = document.getElementById('mobile-menu');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (menuToggle && navLinks) {
+        // 點擊按鈕：切換選單顯示/隱藏
+        menuToggle.addEventListener('click', function() {
+            menuToggle.classList.toggle('is-active');
+            navLinks.classList.toggle('active');
+        });
+
+        // 點擊連結後：自動關閉選單 (方便跳轉)
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('is-active');
+                navLinks.classList.remove('active');
+            });
+        });
+    }
+
     // --- 1. 捲動相關邏輯 (合併導覽列與回到頂端按鈕) ---
     window.addEventListener('scroll', () => {
         const scrollY = window.scrollY;
